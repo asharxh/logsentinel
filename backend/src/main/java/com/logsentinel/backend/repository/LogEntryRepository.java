@@ -14,4 +14,6 @@ public interface LogEntryRepository extends JpaRepository<LogEntry, Long> {
     List<LogEntry> findByEventType(String eventType);
 
     List<LogEntry> findAllByOrderByTimestampDesc();
+
+    long countByIpAddressAndEventType(String ipAddress, String eventType);
 }
