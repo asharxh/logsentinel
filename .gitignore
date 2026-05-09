@@ -1,1 +1,14 @@
-.idea/
+# Java
+backend/target/
+
+# Python
+parser-service/__pycache__/
+parser-service/*.pyc
+parser-service/venv/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# OS
+.DS_Store
