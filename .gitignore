@@ -1,14 +1,16 @@
-# Java
+# ===== BACKEND =====
 backend/target/
 
-# Python
+# ===== PYTHON =====
 parser-service/__pycache__/
 parser-service/*.pyc
 parser-service/venv/
 
-# Node
+# ===== FRONTEND =====
 frontend/node_modules/
 frontend/dist/
+frontend/.vite/
 
-# OS
+# ===== LOGS / OS =====
+*.log
 .DS_Store
