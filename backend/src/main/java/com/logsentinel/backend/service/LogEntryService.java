@@ -6,6 +6,7 @@ import com.logsentinel.backend.repository.AlertRepository;
 import com.logsentinel.backend.repository.LogEntryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,10 +17,16 @@ public class LogEntryService {
 
     private final LogEntryRepository logEntryRepository;
     private final AlertRepository alertRepository;
+    private final SimpMessagingTemplate messagingTemplate;
 
     public LogEntry saveLog(LogEntry logEntry) {
 
         LogEntry savedLog = logEntryRepository.save(logEntry);
+
+        messagingTemplate.convertAndSend(
+                "/topic/logs",
+                savedLog
+        );
 
         detectBruteForce(savedLog);
 
