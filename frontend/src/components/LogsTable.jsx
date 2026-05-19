@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
-import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
+import SockJS from "sockjs-client/dist/sockjs";
 
 function LogsTable() {
 
@@ -14,11 +14,18 @@ function LogsTable() {
         const socket = new SockJS("http://localhost:8080/ws");
 
         const stompClient = new Client({
+
             webSocketFactory: () => socket,
+
+            reconnectDelay: 5000,
+
+            debug: (str) => {
+                console.log(str);
+            },
 
             onConnect: () => {
 
-                console.log("Connected to WebSocket");
+                console.log("WebSocket Connected");
 
                 stompClient.subscribe("/topic/logs", (message) => {
 
@@ -26,6 +33,10 @@ function LogsTable() {
 
                     setLogs((prevLogs) => [newLog, ...prevLogs]);
                 });
+            },
+
+            onStompError: (frame) => {
+                console.error(frame);
             },
         });
 
