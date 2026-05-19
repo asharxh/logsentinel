@@ -1,12 +1,40 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
+import SockJS from "sockjs-client";
+import { Client } from "@stomp/stompjs";
 
 function LogsTable() {
 
     const [logs, setLogs] = useState([]);
 
     useEffect(() => {
+
         fetchLogs();
+
+        const socket = new SockJS("http://localhost:8080/ws");
+
+        const stompClient = new Client({
+            webSocketFactory: () => socket,
+
+            onConnect: () => {
+
+                console.log("Connected to WebSocket");
+
+                stompClient.subscribe("/topic/logs", (message) => {
+
+                    const newLog = JSON.parse(message.body);
+
+                    setLogs((prevLogs) => [newLog, ...prevLogs]);
+                });
+            },
+        });
+
+        stompClient.activate();
+
+        return () => {
+            stompClient.deactivate();
+        };
+
     }, []);
 
     const fetchLogs = async () => {
