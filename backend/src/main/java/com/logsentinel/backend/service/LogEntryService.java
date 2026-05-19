@@ -47,6 +47,25 @@ public class LogEntryService {
 
         if (failedCount >= 5) {
 
+            var existingAlert =
+                    alertRepository
+                            .findTopByIpAddressAndAlertTypeOrderByCreatedAtDesc(
+                                    logEntry.getIpAddress(),
+                                    "BRUTE_FORCE_ATTACK"
+                            );
+
+            if (existingAlert.isPresent()) {
+
+                LocalDateTime lastAlertTime =
+                        existingAlert.get().getCreatedAt();
+
+                if (lastAlertTime.isAfter(
+                        LocalDateTime.now().minusMinutes(2)
+                )) {
+                    return;
+                }
+            }
+
             Alert alert = Alert.builder()
                     .alertType("BRUTE_FORCE_ATTACK")
                     .severity("HIGH")
