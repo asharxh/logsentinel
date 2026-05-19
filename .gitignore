@@ -5,6 +5,7 @@ backend/target/
 parser-service/__pycache__/
 parser-service/*.pyc
 parser-service/venv/
+parser-service/attack-simulator/venv
 
 # ===== FRONTEND =====
 frontend/node_modules/
@@ -14,3 +15,4 @@ frontend/.vite/
 # ===== LOGS / OS =====
 *.log
 .DS_Store
+/note for me.txt
