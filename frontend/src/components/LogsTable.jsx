@@ -84,8 +84,12 @@ function LogsTable() {
                             key={log.id}
                             className="border-b border-gray-700"
                         >
-                            <td className="p-2">
-                                {log.timestamp}
+                            <td>
+                                {
+                                    log.timestamp
+                                        ? new Date(log.timestamp).toLocaleString()
+                                        : "N/A"
+                                }
                             </td>
 
                             <td className="p-2">

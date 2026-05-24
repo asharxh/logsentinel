@@ -1,5 +1,6 @@
 import LogsTable from "./components/LogsTable";
 import AlertsPanel from "./components/AlertsPanel";
+import DashboardMetrics from "./components/DashboardMetrics";
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
             <h1 className="text-4xl font-bold mb-6">
                 LogSentinel SIEM Dashboard
             </h1>
+            <DashboardMetrics />
 
             <AlertsPanel />
 
