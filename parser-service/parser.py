@@ -1,9 +1,12 @@
 import re
 import requests
 from datetime import datetime
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
 API_URL = "http://localhost:8080/api/logs"
 
-LOG_FILE = "../sample-logs/auth.log"
+LOG_FILE = BASE_DIR.parent / "sample-logs" / "auth.log"
 
 pattern = re.compile(
     r'(\w+\s+\d+\s+\d+:\d+:\d+).*from\s+(\d+\.\d+\.\d+\.\d+)'
