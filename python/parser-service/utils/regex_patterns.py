@@ -1,0 +1,1 @@
+FAILED_LOGIN_PATTERN = r'from (\d+\.\d+\.\d+\.\d+)'
