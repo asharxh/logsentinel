@@ -6,6 +6,7 @@ python/__pycache__/
 parser-service/*.pyc
 python/venv/
 python/attack-simulator/venv
+/python/parser-service/venv/
 
 # ===== FRONTEND =====
 frontend/node_modules/
