@@ -5,7 +5,7 @@ from forwarders.api_forwarder import forward_log
 from utils.log_reader import clean_log_line
 
 
-LOG_FILE = "../sample-logs/auth.log"
+LOG_FILE = "../../sample-logs/auth.log"
 
 
 def main():
