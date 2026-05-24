@@ -8,14 +8,86 @@ It collects logs, parses them, stores them, detects threats, and displays securi
 
 # Project Goal
 
-To build a simplified SIEM system that can:
-
-- Ingest system logs
-- Parse and send logs to backend
-- Store logs in database
-- Detect suspicious activity (like brute force attacks)
-- Generate security alerts
-- Display everything in a dashboard
+.
+├── backend
+│   ├── pom.xml
+│   └── src
+│       ├── main
+│       │   ├── java/com/logsentinel/backend
+│       │   │   ├── BackendApplication.java
+│       │   │   ├── config
+│       │   │   │   └── WebSocketConfig.java
+│       │   │   ├── controller
+│       │   │   │   ├── AlertController.java
+│       │   │   │   ├── DashboardController.java
+│       │   │   │   ├── LogEntryController.java
+│       │   │   │   └── TestController.java
+│       │   │   ├── dto
+│       │   │   ├── entity
+│       │   │   │   ├── Alert.java
+│       │   │   │   └── LogEntry.java
+│       │   │   ├── repository
+│       │   │   │   ├── AlertRepository.java
+│       │   │   │   └── LogEntryRepository.java
+│       │   │   └── service
+│       │   │       ├── AlertService.java
+│       │   │       └── LogEntryService.java
+│       │   └── resources
+│       │       └── application.properties
+│       └── test
+│
+├── frontend
+│   ├── package.json
+│   ├── src
+│   │   ├── App.jsx
+│   │   ├── components
+│   │   │   ├── AlertsPanel.jsx
+│   │   │   ├── DashboardMetrics.jsx
+│   │   │   └── LogsTable.jsx
+│   │   ├── services
+│   │   │   └── api.js
+│   │   ├── index.css
+│   │   └── main.jsx
+│   ├── tailwind.config.js
+│   └── vite.config.js
+│
+├── python
+│   ├── attack-simulator
+│   │   ├── attacks
+│   │   │   ├── brute_force.py
+│   │   │   ├── port_scan.py
+│   │   │   ├── sql_injection.py
+│   │   │   ├── suspicious_traffic.py
+│   │   │   └── xss.py
+│   │   ├── utils
+│   │   │   ├── faker_utils.py
+│   │   │   └── sender.py
+│   │   ├── main.py
+│   │   └── requirements.txt
+│   │
+│   └── parser-service
+│       ├── collectors
+│       │   ├── file_collector.py
+│       │   ├── syslog_collector.py
+│       │   └── windows_event_collector.py
+│       ├── parsers
+│       │   ├── apache_parser.py
+│       │   ├── auth_parser.py
+│       │   ├── firewall_parser.py
+│       │   └── generic_parser.py
+│       ├── forwarders
+│       │   └── api_forwarder.py
+│       ├── utils
+│       │   ├── log_reader.py
+│       │   └── regex_patterns.py
+│       ├── main.py
+│       └── requirements.txt
+│
+├── sample-logs
+│   ├── apache.log
+│   └── auth.log
+│
+└── readme.md
 
 ---
 
