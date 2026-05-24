@@ -2,10 +2,10 @@
 backend/target/
 
 # ===== PYTHON =====
-parser-service/__pycache__/
+python/__pycache__/
 parser-service/*.pyc
-parser-service/venv/
-parser-service/attack-simulator/venv
+python/venv/
+python/attack-simulator/venv
 
 # ===== FRONTEND =====
 frontend/node_modules/
