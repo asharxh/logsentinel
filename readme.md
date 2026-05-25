@@ -100,7 +100,7 @@ attack-simulator/
 # 1. Clone Repository
 
 ```bash
-git clone <your-repo-url>
+git clone <https://github.com/asharxh/logsentinel>
 cd LogSentinel
 ```
 
