@@ -9,6 +9,8 @@ import LogsTable from "./components/LogsTable";
 import AlertsPanel from "./components/AlertsPanel";
 import DashboardMetrics from "./components/DashboardMetrics";
 import LogFilters from "./components/LogFilters";
+import SeverityChart from "./components/SeverityChart";
+import ThreatDistributionChart from "./components/ThreatDistributionChart";
 
 function App() {
 
@@ -151,6 +153,14 @@ function App() {
             </h1>
 
             <DashboardMetrics />
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+
+                <SeverityChart logs={logs} />
+
+                <ThreatDistributionChart logs={logs} />
+
+            </div>
 
             <AlertsPanel />
 
