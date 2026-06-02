@@ -39,4 +39,23 @@ public class LogEntryController {
     public List<LogEntry> getLogsByEventType(@PathVariable String eventType) {
         return logEntryService.getLogsByEventType(eventType);
     }
+
+    @GetMapping("/search")
+    public List<LogEntry> searchLogs(
+            @RequestParam(required = false) String severity,
+            @RequestParam(required = false) String eventType,
+            @RequestParam(required = false) String ipAddress
+    ) {
+
+        if (severity != null && !severity.isBlank()) {
+            return logEntryService.getLogsBySeverity(severity);
+        }
+        if (eventType != null && !eventType.isBlank()) {
+            return logEntryService.getLogsByEventType(eventType);
+        }
+        if (ipAddress != null && !ipAddress.isBlank()) {
+            return logEntryService.getLogsByIp(ipAddress);
+        }
+        return logEntryService.getAllLogs();
+    }
 }
