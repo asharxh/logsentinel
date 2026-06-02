@@ -11,4 +11,6 @@ public interface AlertRepository extends JpaRepository<Alert, Long> {
             String ipAddress,
             String alertType
     );
+
+    long countBySeverity(String critical);
 }
