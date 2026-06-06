@@ -1,6 +1,7 @@
 from collectors.file_collector import watch_log_file
 from parsers.auth_parser import parse_auth_log
 from parsers.apache_parser import parse_apache_log
+from parsers.firewall_parser import parse_firewall_log
 from parsers.generic_parser import parse_generic_log
 from forwarders.api_forwarder import forward_log
 from utils.log_reader import clean_log_line
@@ -8,7 +9,7 @@ from utils.log_reader import clean_log_line
 
 AUTH_LOG_FILE = "../../sample-logs/auth.log"
 APACHE_LOG_FILE = "../../sample-logs/apache.log"
-
+FIREWALL_LOG_FILE = "../../sample-logs/firewall.log"
 
 processed_lines = set()
 
@@ -22,27 +23,59 @@ def process_log_file(file_path):
 
             clean_line = clean_log_line(line)
 
+            if not clean_line:
+                continue
             if clean_line in processed_lines:
                 continue
             processed_lines.add(clean_line)
 
+            parsed_log = None
+
             if "auth.log" in file_path:
-                parsed_log = parse_auth_log(clean_line)
+
+                parsed_log = parse_auth_log(
+                    clean_line
+                )
 
             elif "apache.log" in file_path:
 
-                parsed_log = parse_apache_log(clean_line)
+                parsed_log = parse_apache_log(
+                    clean_line
+                )
+
+            elif "firewall.log" in file_path:
+
+                parsed_log = parse_firewall_log(
+                    clean_line
+                )
+
             else:
-                parsed_log = parse_generic_log(clean_line)
+                parsed_log = parse_generic_log(
+                    clean_line
+                )
 
             if parsed_log:
-                forward_log(parsed_log)
+                forward_log(
+                    parsed_log
+                )
 
 
 def main():
 
-    process_log_file(AUTH_LOG_FILE)
-    process_log_file(APACHE_LOG_FILE)
+    print("Starting LogSentinel Parser Service...")
+
+    process_log_file(
+        AUTH_LOG_FILE
+    )
+
+    process_log_file(
+        APACHE_LOG_FILE
+    )
+
+    process_log_file(
+        FIREWALL_LOG_FILE
+    )
+
     watch_log_file(
         "../../sample-logs",
         process_log_file
